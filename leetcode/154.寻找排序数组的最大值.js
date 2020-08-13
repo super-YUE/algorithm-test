@@ -6,9 +6,9 @@ var findMin = function(nums) {
   let left = 0, right = nums.length - 1;
   while (left < right) {
     let mid = right + ((left - right) >> 1);
-    if(nums[mid] < nums[right]) {
+    if(nums[mid] < nums[left]) {
       right = mid;
-    } else if(nums[mid] > nums[right]) {
+    } else if(nums[mid] > nums[left]) {
       left = mid + 1;
     } else {
       right--;
