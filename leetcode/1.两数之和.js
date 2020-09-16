@@ -10,7 +10,7 @@
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
-	const temp = {}
+  const temp = {}
 	for (var i = 0; i < nums.length; i++) {
 		var diff = target - nums[i];
 		if (temp[diff] != undefined) {
