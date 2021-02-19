@@ -151,3 +151,88 @@
     return new Car();
   }
 }
+
+
+// create
+{
+  function createObj(obj) {
+    function Obj(){}
+    Obj.prototype = obj
+    return new Obj()
+  }
+}
+
+// call,bind,apply
+{
+  Function.prototype.call = function(context) {
+    if (typeof this != 'function') {
+      throw new TypeError('Error')
+    }
+    context = context || window
+    context.fn = this
+    const args = [...arguments].slice(1)
+    const result = context.fn(args)
+    delete context.fn
+    return result
+  }
+}
+
+{
+  Function.prototype.apply = function(context) {
+    if (typeof this != 'function') {
+      throw new TypeError('Error')
+    }
+    context = context || window
+    context.fn = this
+    let result
+    if (arguments[1]) {
+      result = context.fn(...arguments)
+    } else {
+      result = context.fn()
+    }
+    delete context.fn
+    return result
+  }
+}
+
+{
+  Function.prototype.bind = function(context) {
+    if(typeof this !== 'function') {
+      throw new TypeError('Error')
+    }
+    const _this = this
+    const args = [...arguments].slice(1)
+    return function F() {
+      if (this instanceof F) {
+        return new _this(...args, ...arguments)
+      }
+      return _this.apply(context, args.concat(...arguments))
+    }
+  }
+}
+
+{
+  function Create() {
+    let obj = {} // 创建一个新对象
+    let Con = [].shift.call(arguments) // 取出构造函数
+    obj.__proto__ = Con.prototype
+    let result = Con.apply(obj, arguments)
+    return result instanceof Object ? result : obj
+  }
+}
+
+{
+  function myInstanceof(left, right) {
+    let prototype = right.prototype
+    left = left.__proto__
+    while (true) {
+      if (left === null || left === undefined) {
+        return false
+      }
+      if (prototype === left) {
+        return true
+      }
+      left = left.__proto__
+    }
+  }
+}
