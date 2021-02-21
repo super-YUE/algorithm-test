@@ -46,7 +46,7 @@ class MyArray<T> {
         this.push(this.size, e)
     }
 
-    public addFrist(e: T): void {
+    public addFirst(e: T): void {
         this.push(0, e)
     }
 
@@ -54,7 +54,7 @@ class MyArray<T> {
         return this.data[this.size - 1]
     }
 
-    public getFrist(): T {
+    public getFirst(): T {
         return this.data[0]
     }
 
@@ -130,8 +130,8 @@ class MyArray<T> {
 }
 
 const arr = new MyArray(10)
-arr.addFrist('123')
-arr.addFrist('123')
+arr.addFirst('123')
+arr.addFirst('123')
 arr.print()
 
 export default MyArray;

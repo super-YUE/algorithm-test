@@ -45,7 +45,7 @@ function quickSort(arr, left = 0, right = arr.length - 1) {
   if (left < right) {
     let partitionIndex = partition(arr, right, left, right)
     quickSort(arr, left, partitionIndex - 1 < left ? left : partitionIndex - 1)
-    quickSort(arr, partitionIndex + 1 < right ? partitionIndex + 1 : rightf)
+    quickSort(arr, partitionIndex + 1 < right ? partitionIndex + 1 : right)
   }
   return arr
 }
@@ -69,3 +69,26 @@ function shellSort(arr) {
 }
 
 console.log(quickSort([8, 10, 2, 3 ,6, 1, 9]))
+
+
+const getPartition = (arr, pivot, left, right) => {
+  const pivotVal = arr[pivot]
+  let startIndex = left
+  for(let i = left; i < right; i++) {
+    if(arr[i] < pivotVal) {
+      swap(arr, i, startIndex)
+      startIndex++
+    }
+  }
+  swap(arr, startIndex, pivot)
+  return startIndex
+}
+
+const quickSort = (arr, left = 0, right = right.length - 1) => {
+  if(left < right) {
+    const partitionIndex = getPartition(arr, pivot, left, right)
+    quickSort(arr, left. partitionIndex - 1 < left ? left : partitionIndex - 1 )
+    quickSort(arr, partitionIndex + 1 > right ? right : partitionIndex + 1)
+  }
+  return arr
+}
