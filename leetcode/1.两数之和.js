@@ -9,13 +9,13 @@
  * @param {number} target
  * @return {number[]}
  */
-var twoSum = function(nums, target) {
+var twoSum = function(arr, target) {
   const temp = {}
-	for (var i = 0; i < nums.length; i++) {
-		var diff = target - nums[i];
+	for (var i = 0; i < arr.length; i++) {
+		var diff = target - arr[i];
 		if (temp[diff] != undefined) {
 			return [temp[diff], i]
 		}
-		temp[nums[i]] = i
+		temp[arr[i]] = i
 	}
 };

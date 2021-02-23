@@ -236,3 +236,28 @@
     }
   }
 }
+
+{
+  async function eachLimit(limit, arr, iteratorFn) {
+    const res = []
+    const activeList = []
+    for (const item of arr) {
+      const p = iteratorFn(item);
+      res.push(p);
+      const e = p.then(() =>
+        activeList.splice(activeList.indexOf(e), 1)
+      );
+      activeList.push(e)
+      while (activeList.length >= limit) {
+        await Promise.race(activeList)
+      }
+    }
+    return Promise.all(res);
+  }
+
+  async function test() {
+    const timeout = i => new Promise(resolve => setTimeout(() => resolve(i), i))
+    const result = await eachLimit(2, [100, 200, 300, 400, 500], timeout)
+    console.log(result)
+  }
+}
