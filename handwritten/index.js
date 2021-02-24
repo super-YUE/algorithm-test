@@ -144,15 +144,6 @@
   console.log(car.getColor())
 }
 
-{
-  function createObj(obj){
-    function Car(){}
-    Car.prototype = obj;
-    return new Car();
-  }
-}
-
-
 // create
 {
   function createObj(obj) {
@@ -163,53 +154,53 @@
 }
 
 // call,bind,apply
-{
-  Function.prototype.call = function(context) {
-    if (typeof this != 'function') {
-      throw new TypeError('Error')
-    }
-    context = context || window
-    context.fn = this
-    const args = [...arguments].slice(1)
-    const result = context.fn(args)
-    delete context.fn
-    return result
-  }
-}
+// {
+//   Function.prototype.call = function(context) {
+//     if (typeof this != 'function') {
+//       throw new TypeError('Error')
+//     }
+//     context = context || window
+//     context.fn = this
+//     const args = [...arguments].slice(1)
+//     const result = context.fn(args)
+//     delete context.fn
+//     return result
+//   }
+// }
 
-{
-  Function.prototype.apply = function(context) {
-    if (typeof this != 'function') {
-      throw new TypeError('Error')
-    }
-    context = context || window
-    context.fn = this
-    let result
-    if (arguments[1]) {
-      result = context.fn(...arguments)
-    } else {
-      result = context.fn()
-    }
-    delete context.fn
-    return result
-  }
-}
+// {
+//   Function.prototype.apply = function(context) {
+//     if (typeof this != 'function') {
+//       throw new TypeError('Error')
+//     }
+//     context = context || window
+//     context.fn = this
+//     let result
+//     if (arguments[1]) {
+//       result = context.fn(...arguments)
+//     } else {
+//       result = context.fn()
+//     }
+//     delete context.fn
+//     return result
+//   }
+// }
 
-{
-  Function.prototype.bind = function(context) {
-    if(typeof this !== 'function') {
-      throw new TypeError('Error')
-    }
-    const _this = this
-    const args = [...arguments].slice(1)
-    return function F() {
-      if (this instanceof F) {
-        return new _this(...args, ...arguments)
-      }
-      return _this.apply(context, args.concat(...arguments))
-    }
-  }
-}
+// {
+//   Function.prototype.bind = function(context) {
+//     if(typeof this !== 'function') {
+//       throw new TypeError('Error')
+//     }
+//     const _this = this
+//     const args = [...arguments].slice(1)
+//     return function F() {
+//       if (this instanceof F) {
+//         return new _this(...args, ...arguments)
+//       }
+//       return _this.apply(context, args.concat(...arguments))
+//     }
+//   }
+// }
 
 {
   function Create() {
@@ -223,16 +214,19 @@
 
 {
   function myInstanceof(left, right) {
+    // 获取类型的原型
     let prototype = right.prototype
-    left = left.__proto__
-    while (true) {
-      if (left === null || left === undefined) {
+    // 获取数据的原型
+    let proto = left.__proto__
+    while(true) {
+      // 循环判断对象的原型是否等于类型的原型，直到对象原型为 null，因为原型链最终为 null
+      if (left === null || prototype === undefined) {
         return false
       }
-      if (prototype === left) {
+      if (proto = prototype) {
         return true
       }
-      left = left.__proto__
+      proto = proto.__proto__
     }
   }
 }
@@ -247,7 +241,7 @@
       const e = p.then(() =>
         activeList.splice(activeList.indexOf(e), 1)
       );
-      activeList.push(e)
+      activeList.push(p)
       while (activeList.length >= limit) {
         await Promise.race(activeList)
       }
@@ -259,5 +253,59 @@
     const timeout = i => new Promise(resolve => setTimeout(() => resolve(i), i))
     const result = await eachLimit(2, [100, 200, 300, 400, 500], timeout)
     console.log(result)
+  }
+  test()
+}
+
+{
+  async function asyncLoop(limit, arr, iteratorFn) {
+    const queues = new Array(limit).fill(0).map(() => Promise.resolve())
+    let index = 0;
+    const add = cb => {
+      index = (index + 1) % limit
+      return queues[index] = queues[index].then(() => cb())
+    }
+    let results = []
+    for (let v of arr) {
+      results.push(add(()  => iteratorFn(v)))
+    }
+    return await Promise.all(results)
+  }
+}
+
+{
+  class Scheduler {
+    constructor(limit) {
+      this.limit = limit
+      this.number = 0
+      this.queue = []
+    }
+
+    addTask(timeOut, str) {
+      this.queue.push([timeOut, str])
+    }
+
+    start() {
+      if(this.number < this.limit && this.queue.length) {
+        var [timeout, str] = this.queue.shift()
+        this.number++
+        setTimeout(() => {
+          this.number--
+          this.start()
+        }, timeout * 1000);
+        this.start()
+      }
+    }
+  }
+}
+
+{
+  function getType(data) {
+    let type  = typeof data;
+    if(type != "object") {
+      return type
+    }
+    const typeString = Object.prototype.toString.call(data)
+    return typeString.slice(8,-1)
   }
 }
