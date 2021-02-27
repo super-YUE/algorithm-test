@@ -223,7 +223,7 @@
       if (left === null || prototype === undefined) {
         return false
       }
-      if (proto = prototype) {
+      if (proto == prototype) {
         return true
       }
       proto = proto.__proto__
@@ -307,5 +307,15 @@
     }
     const typeString = Object.prototype.toString.call(data)
     return typeString.slice(8,-1)
+  }
+}
+
+{
+  Array.prototype.map = function(cb) {
+    let newArr = []
+    for(let i = 0; i < this.length; i++) {
+      newArr.push(cb && cb(this[i]))
+    }
+    return newArr
   }
 }
