@@ -1,55 +1,3 @@
-const multiply = function(num1, num2) {
-  if (num1 === '0' || num2 === '0') return 0
-  for(let i = 0; i < num1.length; i++) {
-    let tmp1 = num1[num1.length - 1 - i]
-    for (let j = 0; j < num2.length; j++) {
-      let temp2 = num2[num2.length - 1 -j];
-      // let pos = res[i+j] ? res[i+j]+tem1*tem2 : temp2 * temp1
-      // res[i+j]=pos%10; // 赋值给当前索引位置
-      // // 目标值是否大于10 ==》是否进位 这样简化res去除不必要的"0"
-      // pos >=10 && (res[i+j+1]=res[i+j+1] ? res[i+j+1]+Math.floor(pos/10) : Math.floor(pos/10));
-    }
-  }
-  return res.reverse().join("")
-}
-
-const treeSum = function(arr) {
-  let res = []
-  if(arr.length < 3) {
-    return []
-  }
-  arr.sort((a, b) => a - b)
-  for(let i = 0; i < arr.length; i++) {
-    if(arr[i] > 0) {
-      break
-    }
-    if(i > 0 && arr[i] == arr[i-1]) return
-    const leftIndex = i + 1
-    const rightIndex = arr.length - 1
-    while(leftIndex < rightIndex) {
-      const sum = arr[i] + arr[leftIndex] + arr[rightIndex]
-      if (sum == 0) {
-        res.push({
-          rightIndex,
-          leftIndex,
-          i
-        })
-
-        while(leftIndex < rightIndex && arr[leftIndex] == arr[leftIndex+1]) leftIndex++
-        while(leftIndex < rightIndex && arr[rightIndex] == arr[rightIndex-1]) rightIndex--
-
-        rightIndex--
-        leftIndex++
-
-      } else if (sum > 0) {
-        rightIndex--
-      } else if (sum < 0) {
-        leftIndex++
-      }
-    }
-  }
-}
-
 const moveZero = function(arr) {
   let j = 0
   for(let i = 0; i < arr.length; i++) {
@@ -101,4 +49,71 @@ var checkPossibility = function(arr) {
     }
   }
   return true
+}
+
+const threeSum = function(arr) {
+  let ans = []
+  if(arr.length < 3) return ans
+  arr.sort((a, b) => a - b)
+  for(let i = 0; i < arr.length; i++) {
+    if(arr[i] > 0) break
+    if(i > 0 && arr[i] == arr[i-1]) continue
+    let L = i + 1, R = arr.length - 1
+    while(L < R) {
+      const sum = arr[i] + arr[L] + arr[R]
+      if (sum == 0) {
+        ans.push([
+          arr[i],
+          arr[L],
+          arr[R]
+        ])
+        while(L < R && arr[L+1] == arr[L]) {
+          L++
+        }
+        while(L < R && arr[R-1] == arr[R]) {
+          R--
+        }
+        R--
+        L++
+      } else if(sum > 0) {
+        R--
+      } else {
+        L++
+      }
+    }
+  }
+  return ans
+}
+
+console.log(threeSum([-1,0,1,2,-1,-4]))
+
+const multiply = (num1, num2) => {
+  if(num1 == '0' || num2 == '0') return 0
+  let len1 = num1.length; 
+  let len2 = num2.length;
+  let arr = new Array(len1 + len2).fill(0)
+  let i = len1, j = len2
+  while(i) {
+    i--
+    while(j) {
+      j--
+      let sum = num1[i]*num2[j] + arr[i+j+1]
+      arr[i+j] += 0 | sum / 10
+      arr[i+j+1] = sum % 10
+    }
+    j=len2;
+  }
+  while(arr[0] == 0) {
+    arr.shift()
+  }
+  return arr.join('')
+}
+
+const palindrome = (str) => {
+  let l = 0, r = str.length - 1
+  while(l < r && str[l] == str[r]) {
+    l++
+    r--
+  }
+  return Math.abs(r-l) <= 1
 }

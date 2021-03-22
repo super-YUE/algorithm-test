@@ -50,6 +50,27 @@ function quickSort(arr, left = 0, right = arr.length - 1) {
   return arr
 }
 
+const partition = (arr, pivot, left, right) => {
+  const pivotVal = arr[pivot]
+  const startIndex = left
+  for(let i = left; i < right; i++) {
+    if(arr[i] < pivotVal) {
+      swap(arr, startIndex, i)
+      startIndex++
+    }
+  }
+  swap(arr, startIndex, pivot)
+  return startIndex
+}
+function quickSort(arr, left = 0, right = arr.length - 1) {
+  if (left < right) {
+    let partitionIndex = partition(arr, right, left, right)
+    quickSort(arr, left, partitionIndex - 1 < left ? left : partitionIndex - 1)
+    quickSort(arr, partitionIndex + 1 < right ? partitionIndex + 1 : right)
+  }
+  return arr
+}
+
 // 希尔排序
 function shellSort(arr) {
   let gap = Math.floor(arr.length / 2);
@@ -70,25 +91,19 @@ function shellSort(arr) {
 
 console.log(quickSort([8, 10, 2, 3 ,6, 1, 9]))
 
-
-const getPartition = (arr, pivot, left, right) => {
-  const pivotVal = arr[pivot]
-  let startIndex = left
-  for(let i = left; i < right; i++) {
-    if(arr[i] < pivotVal) {
-      swap(arr, i, startIndex)
-      startIndex++
+function shellSort(arr) {
+  let gap = Math.floor(arr.length / 2)
+  while(gap >= 1) {
+    for(let i = gap; i < arr.length; i++) {
+      for(let j = i - gap; j >= 0; j--) {
+        if(arr[j] > arr[j+gap]) {
+          swap(arr, j, j + gap)
+        } else {
+          break
+        }
+      }
     }
-  }
-  swap(arr, startIndex, pivot)
-  return startIndex
-}
-
-const quickSort = (arr, left = 0, right = right.length - 1) => {
-  if(left < right) {
-    const partitionIndex = getPartition(arr, pivot, left, right)
-    quickSort(arr, left. partitionIndex - 1 < left ? left : partitionIndex - 1 )
-    quickSort(arr, partitionIndex + 1 > right ? right : partitionIndex + 1)
+    gap = Math.floor(gap/2)
   }
   return arr
 }
