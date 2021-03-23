@@ -97,7 +97,7 @@ function createObj(obj) {
   function SuperType() {}
   function SubType(xxx) {
     SuperType.apply(this, xxx) // 第二次调用父类构造函数
-    this.yyy = yyy
+    this.yyy = "yyy"
   }
   SubType.prototype = new SuperType() // 第一次调用父类构造函数
   let instance1 = new SubType()
@@ -111,7 +111,6 @@ function createObj(obj) {
   }
   function SuperType() {}
   const subType = create(SuperType)
-  console.log(subType)
 }
 // 寄生继承(拿到父类的构造函数)
 {
@@ -194,9 +193,9 @@ function createObj(obj) {
 
 {
   const checkType = (data, type = 1) => {
-    const type = typeof data
-    if(type == 'object') {
-      return type
+    const dataType = typeof data
+    if(dataType == 'object') {
+      return dataType
     }
     // function1
     if (type == 1) {
@@ -337,4 +336,22 @@ function createObj(obj) {
       })
     })
   }
+}
+{
+  function deepClone(obj) {
+    let objClone = Array.isArray(obj) ? [] : {}
+    if (obj && typeof obj === 'object') {
+      for(key in obj) {
+        if(obj.hasOwnProperty(key)) {
+          if(obj[key] && typeof obj[key] == 'object') {
+            objClone[key] = deepClone(obj[key])
+          } else {
+            objClone[key] = obj[key]
+          }
+        }
+      }
+    }
+    return objClone
+  }
+  console.log(deepClone({a: 1, b: 2}))
 }

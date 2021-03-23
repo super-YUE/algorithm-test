@@ -211,7 +211,6 @@
     return result instanceof Object ? result : obj
   }
 }
-
 {
   function myInstanceof(left, right) {
     // 获取类型的原型
@@ -230,7 +229,6 @@
     }
   }
 }
-
 {
   async function eachLimit(limit, arr, iteratorFn) {
     const res = []
@@ -255,22 +253,6 @@
     console.log(result)
   }
   test()
-}
-
-{
-  async function asyncLoop(limit, arr, iteratorFn) {
-    const queues = new Array(limit).fill(0).map(() => Promise.resolve())
-    let index = 0;
-    const add = cb => {
-      index = (index + 1) % limit
-      return queues[index] = queues[index].then(() => cb())
-    }
-    let results = []
-    for (let v of arr) {
-      results.push(add(()  => iteratorFn(v)))
-    }
-    return await Promise.all(results)
-  }
 }
 
 {
