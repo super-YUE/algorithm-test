@@ -22,50 +22,44 @@ function throttle(fn, time) {
     }, time);
   }
 }
-function createPerson(xx) {
-  const obj = new Object()
-  obj.xx = xx
-}
-function cons(xx) {
-  this.xx = xx
-}
-
 // 工厂函数
-function createPerson(a, b) {
-  const obj = new Object()
-  obj.a = a
-  obj.b = b
-  return obj
-}
-function myNew(con) {
-  const obj = {}
-  Object.setPrototypeOf(obj, con.prototype)
-  let result = con.apply(obj, arguments)
-  return result instanceof Object ? result : obj
-}
-
-function myInstanceof(left, right) {
-  let prototype = right.prototype
-  left = left.__proto__
-  while(true) {
-    if (left === null || left === undefined) return false
-    if (prototype == left) return true
-    left == left.__proto__
+{
+  function createPerson(a, b) {
+    const obj = new Object()
+    obj.a = a
+    obj.b = b
+    return obj
   }
-}
+  function myNew(con) {
+    const obj = {}
+    Object.setPrototypeOf(obj, con.prototype)
+    let result = con.apply(obj, arguments)
+    return result instanceof Object ? result : obj
+  }
 
-function myNew() {
-  const obj = {}
-  const Con = [].shift.call(arguments)
-  obj.__proto__ = Con.prototype
-  const result = Con.apply(obj, arguments)
-  return result instanceof Object ? result : obj
-}
+  function myInstanceof(left, right) {
+    let prototype = right.prototype
+    left = left.__proto__
+    while(true) {
+      if (left === null || left === undefined) return false
+      if (prototype == left) return true
+      left == left.__proto__
+    }
+  }
 
-function createObj(obj) {
-  function Obj() {}
-  Obj.prototype = obj
-  return new Obj()
+  function myNew() {
+    const obj = {}
+    const Con = [].shift.call(arguments)
+    obj.__proto__ = Con.prototype
+    const result = Con.apply(obj, arguments)
+    return result instanceof Object ? result : obj
+  }
+
+  function createObj(obj) {
+    function Obj() {}
+    Obj.prototype = obj
+    return new Obj()
+  }
 }
 
 {
@@ -155,7 +149,6 @@ function createObj(obj) {
     return result instanceof Object ? result : obj 
   }
 }
-
 {
   function myCall(context) {
     context = context || window
@@ -267,7 +260,6 @@ function createObj(obj) {
     }
   }
 }
-
 {
   async function asyncLoop(arr, limit, fn) {
     const queues = new Array(limit).fill(0).map(() => Promise.resolve())
@@ -338,20 +330,63 @@ function createObj(obj) {
   }
 }
 {
-  function deepClone(obj) {
-    let objClone = Array.isArray(obj) ? [] : {}
-    if (obj && typeof obj === 'object') {
-      for(key in obj) {
-        if(obj.hasOwnProperty(key)) {
-          if(obj[key] && typeof obj[key] == 'object') {
-            objClone[key] = deepClone(obj[key])
-          } else {
-            objClone[key] = obj[key]
-          }
+  function deepClone(data) {
+    if (typeof data === 'object') {
+      const result = Array.isArray(data) ? [] : {};
+      for (let key in data) {
+        if (typeof data[key] === 'object') {
+          result[key] = deepClone(data[key]);
+        } else {
+          result[key] = data[key];
         }
       }
+      return result;
+    } else {
+      return data;
     }
-    return objClone
   }
-  console.log(deepClone({a: 1, b: 2}))
+  console.log(deepClone({
+    a: 1,
+    b: 3
+  }))
+}
+{
+  // 手写调度器
+  class Scheduler {
+    constructor(maxNum) {
+      this.taskList = [];
+      this.count = 0;
+      this.maxNum = maxNum;
+    }
+    async add(promiseCreator) {
+      if (this.count >= this.maxNum) {
+        await new Promise((resolve) => {
+          this.taskList.push(resolve)
+        })
+      }
+      this.count ++;
+      const result = await promiseCreator();
+      this.count --;
+      if (this.taskList.length > 0) {
+        this.taskList.shift()();
+      }
+      return result;
+    }
+  }
+  
+  const timeout = (time) => new Promise(resolve => {
+    setTimeout(resolve, time)
+  })
+  const scheduler = new Scheduler(2);
+  const addTask = (time, val) => {
+    scheduler.add(() => {
+      return timeout(time).then(() => {
+        console.log(val)
+      })
+    })
+  }
+  addTask(1000, 1);
+  addTask(500, 2);
+  addTask(300, 3);
+  addTask(400, 4);
 }
