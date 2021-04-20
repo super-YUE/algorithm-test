@@ -84,7 +84,7 @@
 {
   function flatten(arr) {
     return arr.reduce((a, b) => {
-      return a.concat(Array.isArray(b) ? flatten(b) : b)
+      return a.c(Array.isArray(b) ? flatten(b) : b)
     }, [])
   }
   function flatten(arr) {

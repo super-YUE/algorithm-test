@@ -29,62 +29,27 @@ function mergeSort(arr) {
   return mergeArr(mergeSort(left), mergeSort(right))
 }
 
-const partition = (arr, pivot, left, right) => {
-  const pivotVal = arr[pivot]
-  let startIndex = left
-  for(let i = left; i < right; i++) {
-    if(arr[i] < pivotVal) {
-      swap(arr, startIndex, i)
-      startIndex++
+const partition = (array, left, right) => {
+  let less = left - 1;
+  let more = right;
+  while (left < more) {
+    if (array[left] < array[right]) {
+      ++less;
+      ++left;
+    } else if (array[left] > array[right]) {
+      swap(array, --more, left);
+    } else {
+      left++;
     }
   }
-  swap(arr, startIndex, pivot)
-  return startIndex
+  swap(array, right, more);
+  return [less, more];
 }
 function quickSort(arr, left = 0, right = arr.length - 1) {
   if (left < right) {
-    let partitionIndex = partition(arr, right, left, right)
-    quickSort(arr, left, partitionIndex - 1 < left ? left : partitionIndex - 1)
-    quickSort(arr, partitionIndex + 1 < right ? partitionIndex + 1 : right)
-  }
-  return arr
-}
-
-const partition = (arr, pivot, left, right) => {
-  const pivotVal = arr[pivot]
-  const startIndex = left
-  for(let i = left; i < right; i++) {
-    if(arr[i] < pivotVal) {
-      swap(arr, startIndex, i)
-      startIndex++
-    }
-  }
-  swap(arr, startIndex, pivot)
-  return startIndex
-}
-function quickSort(arr, left = 0, right = arr.length - 1) {
-  if (left < right) {
-    let partitionIndex = partition(arr, right, left, right)
-    quickSort(arr, left, partitionIndex - 1 < left ? left : partitionIndex - 1)
-    quickSort(arr, partitionIndex + 1 < right ? partitionIndex + 1 : right)
-  }
-  return arr
-}
-
-// 希尔排序
-function shellSort(arr) {
-  let gap = Math.floor(arr.length / 2);
-  while (gap >= 1) {
-    for (let i = gap; i < arr.length; i++) {
-      for (var j = i - gap; j >= 0; j = j - gap) {
-        if (arr[j] > arr[j+gap]) {
-          swap(arr, j, j + gap)
-        } else {
-          break
-        }
-      }
-    }
-    gap = Math.floor(gap/2);
+    let indexArr = partition(arr, left, right)
+    quickSort(arr, left, indexArr[0])
+    quickSort(arr, indexArr[1] + 1, right)
   }
   return arr
 }

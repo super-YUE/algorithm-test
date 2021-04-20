@@ -60,29 +60,3 @@ var lengthOfLIS = function(nums) {
   }
   return tail.length
 }
-
-{
-  var lengthOfLIS = function(nums) {
-    let n = nums.length
-    if (n <= 1) {
-      return n
-    }
-    const tail = [nums[0]]
-    for (let i = 0; i < nums.length; i++) {
-      if (nums[i] > tail[tail.length - 1]) {
-        tail.push(nums[i])
-      } else {
-        let left = 0, right = tail.length - 1
-        while(left < right) {
-          let mid = Math.floor((left + right) / 2)
-          if(tail[mid] < nums[i]) {
-            left = mid + 1
-          } else {
-            right = mid
-          }
-        }
-        tail[left] = nums[i]
-      }
-    }
-  }
-}
