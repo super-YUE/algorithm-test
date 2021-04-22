@@ -209,3 +209,183 @@
   });
   console.log('script end');
 }
+{
+  function myNew() {
+    const Con = [].shift.call(arguments)
+    const obj = new Object()
+    obj.__proto__ = Con
+    const result = Con.apply(obj, arguments)
+    return result instanceof Object ? result : obj
+  }
+  function myCreate(obj) {
+    function F(){}
+    F.prototype = obj
+    return new F()
+  }
+  function myCall(context) {
+    context = context || window
+    const args = [...arguments].slice(1)
+    context.fn = this
+    const result = context.fn(args)
+    delete context.fn
+    return result
+  }
+  function myApply(context) {
+    context = context || window
+    context.fn = this
+    let result
+    if(arguments[1]) {
+      result = context.fn(arguments[1])
+    } else {
+      result = context.fn()
+    }
+    delete context.fn
+    return result
+  }
+  function myBind(context) {
+    let _this = this
+    const args = [...arguments].slice(1)
+    return function F() {
+      if(this instanceof F) {
+        return new _this(...args. arguments)
+      } else {
+        return _this.apply(context, ...args.concat(arguments))
+      }
+    }
+  }
+}
+{
+  function debounce(fn, time) {
+    let timer
+    if (timer) {
+      clearTimeout(timer)
+    }
+    return function() {
+      timer = setTimeout(() => {
+        fn.apply(this, arguments)
+      }, time);
+    }
+  }
+  function throttle(fn, time) {
+    let isStart = false
+    if (isStart) return
+    isStart = true
+    return function() {
+      setTimeout(() => {
+        fn.apply(this, arguments)
+        isStart = false
+      }, time);
+    }
+  }
+}
+{
+  function myNew() {
+    const Con = [].shift.call(arguments)
+    const obj = new Object()
+    obj.__proto__ = Con.prototype
+    const result = Con.apply(obj, arguments)
+    return result instanceof Object ? result : obj
+  }
+}
+{
+  function myCall(context) {
+    context = context || window
+    const args = arguments.slice(1)
+    context.fn = this
+    const result = context.fn(args)
+    delete context.fn
+    return result
+  }
+  function myApply(context) {
+    context = context || window
+    context.fn = this
+    let result
+    if(arguments[1]) {
+      result = context.fn(arguments[1])
+    } else {
+      result = context.fn()
+    }
+    delete context.fn
+    return result
+  }
+  function myBind(context) {
+    const _this = this
+    const args = arguments.slice(1)
+    return function F() {
+      if (this instanceof F) {
+        return new _this(...args, ...arguments)
+      } else {
+        return _this.apply(context, args.concat(arguments))
+      }
+    }
+  }
+  function myInstanceof(left, right) {
+    const prototype = right.prototype
+    left = left.__proto__
+    while(true) {
+      if(left === null || left === undefined) return false
+      if(left == prototype) {
+        return true
+      }
+      left = left.__proto__
+    }
+  }
+  function myCreate(obj) {
+    function F() {}
+    F.prototype = obj
+    return new F()
+  }
+  parseFloat((0.1 + 0.2)).toFixed(2)
+}
+{
+  function getType(data, type = 1) {
+    let dataType = typeof data
+    if (dataType !== 'object') {
+      return dataType
+    }
+    if (type == 1) {
+      const stringType = Object.prototype.toString.call(data)
+      return stringType.slice(8, -1)
+    } else {
+      if (data.constructor == Array) {
+        return 'Array'
+      }
+      if (data.constructor == Date) {
+        return 'Date'
+      }
+      if (data.constructor == Object) {
+        return 'Object'
+      }
+    }
+  }
+}
+{
+  var myApp = {}
+  myApp.namespace = function(name) {
+    const parts = name.split('.')
+    const current = myApp
+    for (var i in parts) {
+      if (!current[parts[i]]) {
+        current[parts[i]] = {}
+      }
+      current = current[ parts[ i ] ];
+    }
+  }
+}
+{
+  var strategies = {
+    "S": function(salary) {
+      return salary * 4
+    },
+    "A": function(salary) {
+      return salary * 3
+    },
+    "C": function(salary) {
+      return salary * 2
+    }
+  }
+  var calculateBonus = function( level, salary ){ 
+    return strategies[ level ]( salary );
+  };
+  
+}
