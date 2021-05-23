@@ -1,0 +1,210 @@
+{
+  "categoryName": "组合包",
+  "categoryType": "9049",
+  "channel": "501",
+  "channelName": "微信",
+  "createTime": "2021-05-18 19:03:23",
+  "discountPrice": "0",
+  "memberId": "",
+  "message": "成功",
+  "openId": "oOCyauBVwLhq0_q8UegLem0D1mgc",
+  "orderCustomerName": "王平",
+  "orderCustomerTel": "18911649387",
+  "orderProductItems": [
+      {
+          "businessEndTime": "24:00",
+          "businessStartTime": "00:00",
+          "categoryName": "组合包",
+          "categoryType": "9049",
+          "checkLocation": 0,
+          "detailLocation": "",
+          "detailNote": "",
+          "discountPrice": 0,
+          "extJson": {
+              "subProductList": [
+                  {
+                      "count": 4,
+                      "productCode": "9033001001",
+                      "productName": "GN鲲鹏20元接送机券",
+                      "productType": "9033",
+                      "subProductItemList": [
+                          {
+                              "itemId": "500909ae-0ea3-4b42-b5c9-32f0c4fda494",
+                              "passengerId": "",
+                              "passengerName": "",
+                              "qrcode": "AP_CO_WX7887B23H7ZLE432227EGJ",
+                              "status": "06",
+                              "statusDesc": "06"
+                          },
+                          {
+                              "itemId": "726569a4-5278-4fc7-b5f0-c467fa491e8b",
+                              "passengerId": "",
+                              "passengerName": "",
+                              "qrcode": "AP_CO_WX7887B23H7ZLE432227C7P",
+                              "status": "06",
+                              "statusDesc": "06"
+                          },
+                          {
+                              "itemId": "1a4d17ee-a5bf-4561-9071-dded38486ca6",
+                              "passengerId": "",
+                              "passengerName": "",
+                              "qrcode": "AP_CO_WX7887B23H7ZLE432227FLW",
+                              "status": "06",
+                              "statusDesc": "06"
+                          },
+                          {
+                              "itemId": "25abdd60-266a-4776-8c38-c1f6506236da",
+                              "passengerId": "",
+                              "passengerName": "",
+                              "qrcode": "AP_CO_WX7887B23H7ZLE432227DC7",
+                              "status": "06",
+                              "statusDesc": "06"
+                          }
+                      ],
+                      "unUseCount": 0,
+                      "useCount": 4
+                  },
+                  {
+                      "count": 4,
+                      "productCode": "9032001005",
+                      "productName": "GN满100抵10酒店券",
+                      "productType": "9032",
+                      "subProductItemList": [
+                          {
+                              "itemId": "551cca20-b5f0-4a24-a550-855864147eb7",
+                              "passengerId": "",
+                              "passengerName": "",
+                              "qrcode": "1000000674562873",
+                              "status": "06",
+                              "statusDesc": "06"
+                          },
+                          {
+                              "itemId": "470ccc59-e719-4426-aa03-54782b7681fd",
+                              "passengerId": "",
+                              "passengerName": "",
+                              "qrcode": "1000000674562871",
+                              "status": "06",
+                              "statusDesc": "06"
+                          },
+                          {
+                              "itemId": "490cd7e1-52c6-48f6-b7d7-9363964342c0",
+                              "passengerId": "",
+                              "passengerName": "",
+                              "qrcode": "1000000674562872",
+                              "status": "06",
+                              "statusDesc": "06"
+                          },
+                          {
+                              "itemId": "0062085f-9ac4-47cb-a583-3e195ee0bd43",
+                              "passengerId": "",
+                              "passengerName": "",
+                              "qrcode": "1000000674562870",
+                              "status": "06",
+                              "statusDesc": "06"
+                          }
+                      ],
+                      "unUseCount": 0,
+                      "useCount": 4
+                  },
+                  {
+                      "count": 6,
+                      "productCode": "9099001001",
+                      "productName": "国航双城卡6次权益",
+                      "productType": "9099",
+                      "rightCityInfo": {
+                          "departCity": [
+                              {
+                                  "cityName": "北京",
+                                  "cityCode": "BJS"
+                              },
+                              {
+                                  "cityName": "天津",
+                                  "cityCode": "TSN"
+                              }
+                          ],
+                          "arriveCity": [
+                              {
+                                  "cityName": "广州",
+                                  "cityCode": "CAN"
+                              },
+                              {
+                                  "cityName": "深圳",
+                                  "cityCode": "SZX"
+                              }
+                          ]
+                      },
+                      "subProductItemList": [
+                          {
+                              "itemId": "16c9bd54-537b-4673-98e9-a7a157ea6720",
+                              "passengerId": "",
+                              "passengerName": "王平",
+                              "qrcode": "AR_CA01_QSF7VBKOTXI3QI",
+                              "status": "06",
+                              "statusDesc": "06"
+                          }
+                      ],
+                      "unUseCount": 6,
+                      "useCount": 0
+                  }
+              ]
+          },
+          "itemStatus": "0200",
+          "itemStatusText": "待使用",
+          "items": [
+              {
+                  "discountPrice": 0,
+                  "itemGuid": "e433d5ce-7284-46f4-a3be-d037b71a67c8",
+                  "payPrice": 1,
+                  "shouldPayPrice": 1
+              }
+          ],
+          "parkType": 0,
+          "payMoney": 1,
+          "placeType": 0,
+          "productContexts": [],
+          "productName": "国航双城卡测试",
+          "productNote": "",
+          "qrcodeName": "yjz组合包供应商设备核销",
+          "qrcodes": [
+              {
+                  "couponUrl": "",
+                  "qrcode": "",
+                  "qrcodeStatus": "0200",
+                  "qrcodeStatusText": "待使用"
+              }
+          ],
+          "quantity": 1,
+          "resourceCode": "9049001",
+          "resourceId": 10901,
+          "resourceName": "9049默认商户测试",
+          "retreatNote": "",
+          "serviceFlow": "",
+          "serviceLables": [],
+          "serviceNote": "",
+          "shouldMoney": 1,
+          "skuCode": "9049001011",
+          "unitPrice": 1,
+          "usableQuantity": 1,
+          "useSummary": "",
+          "validEndTime": "",
+          "validStartTime": ""
+      }
+  ],
+  "orderSerialNo": "FMLS01D83KOTXH1II86791",
+  "orderShouldTotal": 1,
+  "orderSource": 2,
+  "orderStatus": "0200",
+  "orderStatusText": "待使用",
+  "orderUserTotal": 1,
+  "payExpiredTime": "2021-05-18 19:33:19",
+  "payTime": "2020-09-07 13:20:38",
+  "productImgs": [
+      ""
+  ],
+  "productName": "国航双城卡测试",
+  "remark": "",
+  "scope": 0,
+  "success": true,
+  "traceId": "f80dddcb-7791-4c0b-a379-0cb9a321e817",
+  "unionId": "ohmdTt8Me92-09HrTttymIBPJjFc"
+}

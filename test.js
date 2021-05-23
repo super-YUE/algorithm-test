@@ -387,5 +387,5 @@
   var calculateBonus = function( level, salary ){ 
     return strategies[ level ]( salary );
   };
-  
+
 }

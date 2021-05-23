@@ -66,42 +66,6 @@ const assert = require('assert');
   }
 }
 {
-  var lengthOfLongestSubstring = function(s) {
-    const occ = new Set()
-    const n = s.length
-    let rk = -1, ans = 0
-    for (let i = 0; i < n; i++) {
-      if (i != 0) {
-        occ.delete(s.charAt(i - 1));
-      }
-      while (rk + 1 < n && !occ.has(s.charAt(rk + 1))) {
-        occ.add(s.charAt(rk + 1))
-        rk++
-      }
-      ans = Math.min(ans, rk + 1 - i)
-    }
-    return ans
-  }
-}
-{
-  var lengthOfLongestSubstring = function(s) {
-    const mySet = new Set()
-    const n = s.length
-    let rk = -1, ans = 0
-    for (let i = 0; i < n; i++) {
-      if (i != 0) {
-        mySet.delete(s.charAt(i - 1));
-        while(rk + 1 < n && !mySet.has(s.charAt(rk+1))) {
-          mySet.add(s.charAt(rk+1))
-          rk++
-        }
-        ans = Math.min(ans, rk + 1 - i)
-      }
-    }
-    return ans
-  }
-}
-{
   var findNumberIn2DArray = function(matrix, target) {
     if(!matrix.length) return false;
     let x = matrix.length - 1, y = 0;
@@ -116,20 +80,6 @@ const assert = require('assert');
     }
     return false;
   };
-  var findNumberIn2DArray = function(matrix, target) {
-    if(!matrix.length) return false
-    let x = matrix.length - 1, y = 0;
-    while (x >= 0 && y < matrix[0].length) {
-      if (matrix[x][y] === target) {
-        return true
-      } else if(matrix[x][y] > target) {
-        x--
-      } else {
-        y++
-      }
-    }
-    return false
-  }
 }
 {
   var Trie = function() {
@@ -201,33 +151,33 @@ const assert = require('assert');
     return res
   }
 }
-{
-  function factory(xxx) {
-    const obj = new Object()
-    obj.xxx = xxx
-    return obj
-  }
-  function Person(xxx) {
-    this.xxx = xxx
-  }
-  const person = new Person()
+// {
+//   function factory(xxx) {
+//     const obj = new Object()
+//     obj.xxx = xxx
+//     return obj
+//   }
+//   function Person(xxx) {
+//     this.xxx = xxx
+//   }
+//   const person = new Person()
   
-  function Person () {}
-  Person.prototype.name = "factory"
-  Person.prototype.sayName = function() {
-    console.log(this.name)
-  }
-  const person1 = new Person()
-  console.log(person1)
-  function Person() {
+//   function Person () {}
+//   Person.prototype.name = "factory"
+//   Person.prototype.sayName = function() {
+//     console.log(this.name)
+//   }
+//   const person1 = new Person()
+//   console.log(person1)
+//   function Person() {
 
-  }
-  Person.prototype.constructor = Person
-  const person1 = new Person()
-  const person2 = new Person()
-  person1.__proto__ = Person.prototype
-  person2.__proto__ = Person.prototype
-}
+//   }
+//   Person.prototype.constructor = Person
+//   const person1 = new Person()
+//   const person2 = new Person()
+//   person1.__proto__ = Person.prototype
+//   person2.__proto__ = Person.prototype
+// }
 {
   function SuperType() {
     this.property = true
@@ -362,5 +312,90 @@ const assert = require('assert');
     obj.__proto__ = Con
     const result = Con.apply(obj, arguments)
     return typeof result == 'object' ? result : obj
+  }
+}
+{
+  class Observer {
+    constructor() {
+      this.listeners = []
+    }
+
+    listen(key, fn) {
+      if (!this.listeners[key]) {
+        this.listeners[key] = []
+      }
+      this.listeners[key].push(fn)  
+    }
+    
+    trigger() {
+      var key = Array.prototype.shift.call(arguments),
+        fns = this.listeners[key];
+      if(!fns || fns.length == 0) {
+        return false
+      }
+      for(let i = 0; fn; fn = fns[i++]) {
+        fn.apply( this, arguments );
+      }
+    }
+
+  }
+}
+
+{
+  // 创建对象
+  function factory(xxx) {
+    const obj = {}
+    obj.xxx = xxx
+  }
+  const a = factory(1)
+  function Con(xxx) {
+    this.xxx = xxx
+  }
+  const b = new Con(2)
+  function Con2() {}
+  Con2.prototype.xxx = xxx
+
+  function Con3(xxx) {
+    this.xxx = xxx
+  }
+  Con3.prototype = {
+    constructor: Con3,
+    getXXX: function() {
+      console.log(this.xxx)
+    }
+  }  
+}
+
+{
+  // 继承
+  function OldCar() {
+    this.color = "red"
+    this.passengers = [1, 2, 3, 4]
+  }
+  OldCar.prototype.getOldCar = function() {
+    return this.color
+  }
+  function NewCar() {
+    this.color = "blue"
+  }
+  NewCar.prototype = new OldCar()
+  const car1 = new NewCar()
+}
+{
+  function superType() {
+
+  }
+  function inherit(subType, superType) {
+    const property = Object.create(superType.property)
+    property.constructor = subType
+    subType.property = property
+  }
+  function subType() {
+    superType.call(this)
+  }
+  function myCreate(obj) {
+    function F(){}
+    F.__proto__ = obj.property
+    return new F()
   }
 }
