@@ -195,3 +195,9 @@
     }
   }
 }
+{
+  function sumFn(n) {
+    if(n == 1) return 
+    return n * sumFn(n-1)
+  }
+}
