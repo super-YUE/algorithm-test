@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test</title>
+</head>
+<body>
+  <script>
+    // function test() {
+    //   this.name = '123'
+    //   console.log(this.name)
+    //   return {
+    //     myCall: function() {
+    //       console.log(this.name)
+    //     }
+    //   }
+    // }
+    // var name = "123"
+    // const obj = {
+    //   name: '456',
+    //   myCall: function() {
+    //     console.log(name)
+    //   }
+    // }
+    // res.call(obj)
+    // obj.myCall()
+  </script>
+  <!-- <script>
+    function test() {
+      return {
+        name: 'yourName',
+        callFn: function() {
+          console.log(this.name)
+        }
+      }
+    }
+    this.name = 'documentName'
+    const a = test().callFn
+    console.log(a())
+  </script> -->
+  <!-- <script>
+    async function async1() {
+      console.log('async1 start');
+      await async2();
+      console.log('async1 end');
+    }
+    async function async2() {
+      console.log('async2');
+    }
+    console.log('script start');
+    setTimeout(function() {
+      console.log('setTimeout');
+    }, 100)
+    async1();
+    requestAnimationFrame(() => {
+      console.log('requestAnimationFrame');
+    })
+    new Promise(function(resolve) {
+      console.log('promise1');
+      resolve();
+    }).then(function() {
+      console.log('promise1 then');
+      return 'promise1 end';
+    }).then((res) => {
+      console.log(res);
+    }).then((res) => {
+      console.log(res);
+    });
+    console.log('script end');
+  </script> -->
+</body>
+</html>

@@ -9,7 +9,7 @@ function mergeArr(left, right) {
   let temp = []
   let leftIndex = 0;
   let rightIndex = 0;
-  while (left.length > leftIndex && right.length > right.length) {
+  while (left.length > leftIndex && right.length > rightIndex) {
     if (left[leftIndex] <= right[rightIndex]) {
       temp.push(left[leftIndex])
       leftIndex++
@@ -29,38 +29,11 @@ function mergeSort(arr) {
   return mergeArr(mergeSort(left), mergeSort(right))
 }
 
-const partition = (array, left, right) => {
-  let less = left - 1;
-  let more = right;
-  while (left < more) {
-    if (array[left] < array[right]) {
-      ++less;
-      ++left;
-    } else if (array[left] > array[right]) {
-      swap(array, --more, left);
-    } else {
-      left++;
-    }
-  }
-  swap(array, right, more);
-  return [less, more];
-}
-function quickSort(arr, left = 0, right = arr.length - 1) {
-  if (left < right) {
-    let indexArr = partition(arr, left, right)
-    quickSort(arr, left, indexArr[0])
-    quickSort(arr, indexArr[1] + 1, right)
-  }
-  return arr
-}
-
-console.log(quickSort([8, 10, 2, 3 ,6, 1, 9]))
-
 function shellSort(arr) {
   let gap = Math.floor(arr.length / 2)
   while(gap >= 1) {
     for(let i = gap; i < arr.length; i++) {
-      for(let j = i - gap; j >= 0; j--) {
+      for(let j = i - gap; i >= 0; j--) {
         if(arr[j] > arr[j+gap]) {
           swap(arr, j, j + gap)
         } else {
@@ -68,7 +41,35 @@ function shellSort(arr) {
         }
       }
     }
-    gap = Math.floor(gap/2)
+    gap = Math.floor(gap / 2)
+  }
+  return arr
+}
+
+console.log(shellSort([8, 10, 2, 3 ,6, 1, 9]))
+
+function findPartition(arr, left, right) {
+  let less = left - 1
+  let more = right
+  while(left < more) {
+    if (arr[left] < arr[right]) {
+      left++
+      less++
+    } else if(arr[left] > arr[right]) {
+      swap(arr, --more, left)
+    } else {
+      left++
+    }
+  }
+  swap(arr, more, right)
+  return [less, more]
+}
+
+function quickSort(arr, left = 0, right = arr.length - 1) {
+  if(left < right) {
+    const partition = findPartition(arr, left, right)
+    quickSort(arr, left, partition[0])
+    quickSort(arr, partition[1], right)
   }
   return arr
 }

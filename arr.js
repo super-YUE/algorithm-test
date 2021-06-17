@@ -1,7 +1,23 @@
-const arr = [1,2,3,4]
-// console.log(arr.splice(1, 1, ...[3, 5, 6]))
-// console.log(arr)
+function add() {
+  const args = [...arguments]
+  function fn() {
+    args.concat(arguments)
+    return fn
+  }
+  fn.toString = function() {
+    return args.reduce((a, b) => a + b)
+  }
+  return fn
+}
 
-console.log(arr.slice(1))
-console.log(arr)
-console.log('123'.concat('56'))
+function add(){
+  const args = [...arguments]
+  function fn() {
+    args.concat(arguments)
+    return fn
+  }
+  fn.toString = function() {
+    return args.reduce((a, b) => a + b)
+  }
+  return fn
+}

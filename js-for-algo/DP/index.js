@@ -59,3 +59,30 @@
 //     return 2 * 3 ** b 
 //   }
 // }
+
+const climbStairs = function(n) {
+  let dp1 = 0; dp2 = 0; res = 1
+  for(let i = 1; i <= n; i++) {
+    dp1 = dp2
+    dp2 = res
+    res = dp1 + dp2
+  }
+}
+
+var checkPossibility = function(arr) {
+  let count = 0
+  for(let i = 0; i < arr.length; i++) {
+    const x = arr[i]
+    const y = arr[i+1]
+    if(x > y) {
+      count++
+      if(count > 1) {
+        return false
+      }
+      if(x > 0 && y < arr[i - 1]) {
+        arr[i+1] = x
+      }
+    }
+  }
+  return true
+}

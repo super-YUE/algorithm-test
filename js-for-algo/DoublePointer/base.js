@@ -11,6 +11,18 @@ const moveZero = function(arr) {
   }
 }
 
+const removeRepeat = function(arr) {
+  let j = 0
+  for(let i = 0; i < arr.length; i++) {
+    if(arr[j] !== arr[i]) {
+      arr[++j] = arr[i]
+    }
+  }
+  return arr.slice(0, j+1)
+}
+console.log(removeRepeat([1,1,1,2,3,4,5]))
+
+// 最大的水
 const maxArea = function(arr) {
   let max = 0, l = 0, r = arr.length - 1
   while(l < r) {
@@ -22,33 +34,6 @@ const maxArea = function(arr) {
     }
   }
   return max
-}
-
-const climbStairs = function(n) {
-  let dp1 = 0; dp2 = 0; res = 1
-  for(let i = 1; i <= n; i++) {
-    dp1 = dp2
-    dp2 = res
-    res = dp1 + dp2
-  }
-}
-
-var checkPossibility = function(arr) {
-  let count = 0
-  for(let i = 0; i < arr.length; i++) {
-    const x = arr[i]
-    const y = arr[i+1]
-    if(x > y) {
-      count++
-      if(count > 1) {
-        return false
-      }
-      if(x > 0 && y < arr[i - 1]) {
-        arr[i+1] = x
-      }
-    }
-  }
-  return true
 }
 
 const threeSum = function(arr) {
@@ -85,8 +70,6 @@ const threeSum = function(arr) {
   return ans
 }
 
-console.log(threeSum([-1,0,1,2,-1,-4]))
-
 const multiply = (num1, num2) => {
   if(num1 == '0' || num2 == '0') return 0
   let len1 = num1.length; 
@@ -108,6 +91,7 @@ const multiply = (num1, num2) => {
   }
   return arr.join('')
 }
+console.log(multiply('123', "3123"))
 
 const palindrome = (str) => {
   let l = 0, r = str.length - 1
@@ -117,3 +101,40 @@ const palindrome = (str) => {
   }
   return Math.abs(r-l) <= 1
 }
+
+
+var addStrings = function(num1, num2) {
+  const ans = []
+  let i = num1.length -1, j = num2.length - 1, add = 0
+  while(i >= 0 || j >= 0 || add != 0) {
+    const x = i >= 0 ? parseInt(num1.charAt(i)) : 0;
+    const y = j >= 0 ? parseInt(num2.charAt(j)) : 0;
+    const result = x + y + add;
+    ans.push(result % 10);
+    add = Math.floor(result / 10)
+    i--
+    j--
+  }
+  return ans.reverse().join('')
+}
+console.log(addStrings('11','123'))
+
+
+
+var multiply = function(num1, num2) {
+  if (num1 === '0' || num2 === '0') {
+    return '0'
+  }
+  var l1 = num1.length, l2 = num2.length, p = new Array(l1 + l2).fill(0)
+  for (var i = l1; i--;) {
+    for (var j = l2; j--;) {
+      var tmp = num1[i] * num2[j] + p[i + j + 1]
+      p[i + j + 1] = tmp % 10
+      p[i + j] += 0 | tmp / 10
+    } 
+  }
+  while(p[0] === 0) {
+    p.shift()
+  }
+  return p.join('')
+};
